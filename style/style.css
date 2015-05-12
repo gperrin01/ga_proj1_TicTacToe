@@ -1,0 +1,28 @@
+/*Start with battlefield simple and borders*/
+.battlefield {
+  /*border: 2px solid black;*/
+  width: 40em;
+  height: 40em;
+}
+.battlefield ul {
+  /*border: 1px solid black;*/
+  width: 100%;
+  height: 33%;
+  padding: 0px;
+  margin: 0 auto;
+}
+.row li {
+  width: 33%;
+  height: 100%;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+#row2 {
+  border-top: 1px solid blue;
+  border-bottom: 1px solid blue;
+}
+.row :nth-child(2) {
+  border-left: 1px solid blue;
+  border-right: 1px solid blue;
+}

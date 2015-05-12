@@ -1,8 +1,21 @@
+ /*All things header*/
+.header {
+  height: 3em;
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0px;
+}
+
+/*end header */
+
 /*Start with battlefield simple and borders*/
 .battlefield {
   /*border: 2px solid black;*/
-  width: 40em;
-  height: 40em;
+  width: 25em;
+  height: 25em;
+  position: relative;
+  left: 25%;
 }
 .battlefield ul {
   /*border: 1px solid black;*/

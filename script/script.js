@@ -1,6 +1,5 @@
 $(document).ready(function(){
 setUpEventListeners();
-}) // END DOC READY
 
 // THE STEPS 
 var battlefield = {
@@ -28,7 +27,7 @@ var whoseTurn = allPlayers.whoseTurn;
 // END OF STEPS
 
 // EVENT LISTERNERS
-var setUpEventListeners = function(){
+function setUpEventListeners() {
 
   // UPDATES ARRAY WHEN WE CLICK
   $('.battlefield li').on('click', function(){
@@ -67,8 +66,9 @@ function computeMoveAndCheck(player, x, y, $item) {
   $item.append(player.avatar);
   // PROBLEM this is pushing the whole <li> down !!!
   if (isWinning(player, x, y)  ) {
-    alert(player.name + ' wins!')
+    alert(player.name + ' wins!');
   }
+  // PROBLEM: at this stage how can i FREEZE the board? ie no further clicks impact anything? can I mute the event listernes?
 }
 function isWinning(player, x, y) {
   return isWinningRow(player, x, y) || isWinningColumn(player, x, y) || isWinningDiagonal(player, x, y);
@@ -97,3 +97,4 @@ function isWinningDiagonal(player, x, y) {
 
 
 
+}) // END DOC READY

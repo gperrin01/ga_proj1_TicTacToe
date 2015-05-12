@@ -25,44 +25,32 @@ var whoseTurn = allPlayers.whoseTurn;
 // whoseTurn = Math.floor(Math.random()*10) % 2 ) ===0 ? player1 : player2;
 // alert('Let us play! \n'+ whoseTurn+' will start! Click to choose your first move!');
 
-/* Steps: 
-Player1 clicks and it updates the battlefield with his name on the corresponding element
-Switch turns - player2 clicks and it updates with his name - but only if the area hasnt been clicked on before
-*/
-
 // END OF STEPS
 
 // EVENT LISTERNERS
-
 var setUpEventListeners = function(){
 
   // UPDATES ARRAY WHEN WE CLICK
   $('.battlefield li').on('click', function(){
-
-    // get coord of where i clicked
+  // get coord of where i clicked
     var x = getXAxis($(this));
     var y = getYAxis($(this));
-    // only perform action if this area hasnt been clicked on before
+    // only perform action if this area hasn't been clicked on before
     if ( usedFields.indexOf($(this).attr('id')) === -1 ) {
-
-      if (whoseTurn === player1.name) {
-        computeMove(player1, x, y, $(this) );
-        // // PROBLEM this is pushing the whole <li> down !!!
+     if (whoseTurn === player1.name) {
+        computeMoveAndCheck(player1, x, y, $(this) );
+        // !!! PROBLEM this is pushing the whole <li> down !!!
         whoseTurn = player2.name;
         } else {
-        computeMove(player2, x, y, $(this) )
+        computeMoveAndCheck(player2, x, y, $(this) );
         whoseTurn = player1.name;       
       }
-
-    } else {
-     alert('Click on an available zone')
-   }     
+    } else { alert('Click on an available zone')  }     
   })
 
 } // End Listerners
 
 // THE FUNCTIONS
-
 function getXAxis ($item) {
   // X axis in battlefield oject = id of the parent <ul>
   return $item.parent().attr('id');
@@ -72,11 +60,32 @@ function getYAxis ($item) {
   return $item.index();
 }
 
-function computeMove(player,x,y, $item) {
+function computeMoveAndCheck(player, x, y, $item) {
+  // update usedFields with my move, and battlefield with player
   usedFields.push($item.attr('id'));
   battlefield[x][y] = player.name; 
   $item.append(player.avatar);
   // PROBLEM this is pushing the whole <li> down !!!
+  if (isWinning(player, x, y)  ) {
+    alert(player.name + ' wins!')
+  }
+}
+function isWinning(player, x, y) {
+  return isWinningRow(player, x, y) || isWinningColumn(player, x, y) || isWinningDiagonal(player, x, y);
+}
+function isWinningRow(player, x, y) {
+  // is current row all player.name?
+  return JSON.stringify([player.name, player.name, player.name]) === JSON.stringify(battlefield[x]);
+  // PROBLEM: why does it not work without the JSON.string?? 2 bits are the same on the console but i get === false
+}
+function isWinningColumn(player, x, y) {
+  // column is defined by y, pass the 3 other rows
+  return JSON.stringify(battlefield['row1'][y]) === JSON.stringify(battlefield['row2'][y]) &&  JSON.stringify(battlefield['row2'][y]) === JSON.stringify(battlefield['row3'][y]);
+}
+function isWinningDiagonal(player, x, y) {
+  // only two possible diagonal combo
+  return ( JSON.stringify(battlefield['row1'][0]) === JSON.stringify(battlefield['row2'][1]) &&  JSON.stringify(battlefield['row2'][1]) === JSON.stringify(battlefield['row3'][2]) )
+    || (  JSON.stringify(battlefield['row1'][2]) === JSON.stringify(battlefield['row2'][1]) &&  JSON.stringify(battlefield['row2'][1]) === JSON.stringify(battlefield['row3'][0]) );
 }
 
 // function getPlayer_1_Avatar() {

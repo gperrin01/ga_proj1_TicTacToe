@@ -1,8 +1,6 @@
  /********* 
  All things header   ***************/
 .header {
-  height: 3em;
-  position: relative;
   text-align: center;
   margin: 0 auto;
   padding: 0px;
@@ -13,34 +11,64 @@
 PACMAN THEME  ***************/
 
 .pacman.header {
+  height: 100px;
+  position: relative;
   background: url('../img/pacman_theme/pacman_logo1.jpg');
   background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 1);
 }
-
-
+.pacman.body {
+  background: url('../img/pacman_theme/pacman_bg.png') no-repeat center center; 
+  background-size: 90% 90%;
+  background-color: black;
+  background-position-y: 120px;
+}
+.pacman.battlefield {
+  width: 100%;
+  height: 25em;
+  position: relative;
+  left: 0%;
+}
+.pacman.battlefield ul {
+  width: 50%;
+  height: 32%;
+  padding: 0px;
+  margin: 0 auto;
+  position: relative;
+  top: -1%;
+}
+#row2.pacman {
+  border-top: 4px dashed yellow;
+  border-bottom: 4px dashed yellow;
+}
+.pacman.row :nth-child(2) {
+  border-left: 4px dashed yellow;
+  border-right: 4px dashed yellow;
+}
 .pacman.footer {
   background: url('../img/pacman_theme/pacman_logo1.jpg');
   background-position: center;
   background-size: contain;
+  width: 100%;
+  height: 3em;
+  position: relative;
+  top: 30px;
 }
+/***********
+BODY  ******************/
+body {
 
+}
 
 /*******************
 Battlefield simple and borders  *********************/
 .battlefield {
   /*border: 2px solid black;*/
-  width: 25em;
-  height: 25em;
-  position: relative;
-  left: 25%;
+
 }
-.battlefield ul {
-  /*border: 1px solid black;*/
-  width: 100%;
-  height: 33%;
-  padding: 0px;
-  margin: 0 auto;
-}
+
 .row li {
   width: 32.5%;
   height: 100%;
@@ -53,21 +81,21 @@ Battlefield simple and borders  *********************/
   background-size: 65px;
   background-position: center;
 }
-#row2 {
+/*#row2 {
   border-top: 1px solid blue;
   border-bottom: 1px solid blue;
 }
 .row :nth-child(2) {
   border-left: 1px solid blue;
   border-right: 1px solid blue;
-}
+}*/
 /*End battlefield*/
 
 /*******************
 FOOTER   *******************/
 .footer {
-  width: 100%;
+/*  width: 100%;
   height: 3em;
   position: relative;
-  top: 40px;
+  top: 0px;*/
 }

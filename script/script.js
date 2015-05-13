@@ -4,15 +4,15 @@ $(document).ready(function(){
 
 /********************************
  THE STEPS         ****************************/
-
-// var battlefield = battlefieldInitialise();
-// var usedFields = [];
-// var allPlayers = allPlayersInitialise() ;
-// var player1 = allPlayers.player1;
-// var player2 = allPlayers.player2;
-// // NEXT do I want var player1 = prompt('What is your name?') ?
-// var whoseTurn = allPlayers.whoseTurn;
-// whoseTurn = player1.name;
+ 
+var battlefield = battlefieldInitialise();
+var usedFields = [];
+var allPlayers = allPlayersInitialise() ;
+var player1 = allPlayers.player1;
+var player2 = allPlayers.player2;
+// NEXT do I want var player1 = prompt('What is your name?') ?
+var whoseTurn = allPlayers.whoseTurn;
+whoseTurn = player1.name;
 
 // NEXT: randomize who starts: equal chances = pure random
 // whoseTurn = Math.floor(Math.random()*10) % 2 ) ===0 ? player1 : player2;

@@ -4,21 +4,15 @@ $(document).ready(function(){
 
 // THE STEPS 
 
-function battlefieldInitialise (){
-  return {
-      'row1': [1,2,3],
-      'row2': [4,5,6],
-      'row3': [7,8,9] 
-  };
-}
 var battlefield = battlefieldInitialise();
 
 var usedFields = [];
-var allPlayers = {
-  'player1': {'name': 'player1', 'avatar': 'img/pacman.png', 'winCount': 0},
-  'player2': {'name': 'player2', 'avatar': 'O', 'winCount': 0}, 
-  'whoseTurn': ''
-     };
+var allPlayers = allPlayersInitialise() ;
+// ;{
+//   'player1': {'name': 'player1', 'avatar': 'img/ghost_red.png', 'winCount': 0},
+//   'player2': {'name': 'player2', 'avatar': 'img/mario.png', 'winCount': 0}, 
+//   'whoseTurn': ''
+//      };
 var player1 = allPlayers.player1;
 var player2 = allPlayers.player2;
 // NEXT var player1 = prompt('What is your name?'); 
@@ -58,6 +52,39 @@ function setUpEventListeners() {
 } // End Listerners
 
 // THE FUNCTIONS
+function battlefieldInitialise (){
+  return {
+      'row1': [1,2,3],
+      'row2': [4,5,6],
+      'row3': [7,8,9] 
+  };
+}
+function allPlayersInitialise() {
+  return {
+    'player1': {'name': 'player1', 'avatar': getPlayerAvatar('Player1'), 'winCount': 0},
+    'player2': {'name': 'player2', 'avatar': getPlayerAvatar('Player2'), 'winCount': 0}, 
+    'whoseTurn': ''
+     };
+ }
+ function getPlayerAvatar(player) {
+  switch (prompt('Hi '+player+', who do you want to be?\n (p)acman, (g)host, (m)ario, or (d)onkey-kong?')) {
+    case 'p':
+      return 'img/avatars/pacman.png';
+      break;
+    case 'g':
+      return 'img/avatars/ghost_red.png';
+      break;
+    case 'm':
+      return 'img/avatars/mario.png';
+      break;
+    case 'd':
+      return 'img/avatars/dkkong.png';
+      break;
+    default:
+      alert("Please enter a valid key. Let's try again");
+      getPlayerAvatar(player);
+  }
+}
 function getXAxis ($item) {
   // X axis in battlefield oject = id of the parent <ul>
   return $item.parent().attr('id');
@@ -73,6 +100,7 @@ function computeMoveAndCheck(player, x, y, $item) {
   battlefield[x][y] = player.name;
 
   // test put background image in <li>
+  // NEXT PLAY SOUND
   $item.css("background-image", "url("+player.avatar+")");
 
   // $item.append(player.avatar);

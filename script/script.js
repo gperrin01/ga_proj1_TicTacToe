@@ -1,5 +1,6 @@
 $(document).ready(function(){
   setUpEventListeners();
+  updateRecapDivs();
 }) // END DOC READY
 
 /********************************
@@ -10,6 +11,7 @@ var usedFields = [];
 var allPlayers = allPlayersInitialise() ;
 var player1 = allPlayers.player1;
 var player2 = allPlayers.player2;
+updateRecapDivs();
 // NEXT do I want var player1 = prompt('What is your name?') ?
 var whoseTurn = allPlayers.whoseTurn;
 whoseTurn = player1.name;
@@ -60,10 +62,9 @@ function battlefieldInitialise (){
 function allPlayersInitialise() {
   var firstP = getPlayerName('First');
   var secondP = getPlayerName('Second');
-
   return {
-    'player1': {'name': firstP, 'avatar': getPlayerAvatar('Player1'), 'winCount': 0},
-    'player2': {'name': secondP, 'avatar': getPlayerAvatar('Player2'), 'winCount': 0}, 
+    'player1': {'name': firstP, 'avatar': getPlayerAvatar(firstP), 'winCount': 0},
+    'player2': {'name': secondP, 'avatar': getPlayerAvatar(secondP), 'winCount': 0}, 
     'whoseTurn': ''
      };
  }
@@ -71,23 +72,30 @@ function getPlayerName(player) {
   return prompt('Who is the '+player+ ' Player?');
  }
  function getPlayerAvatar(player) {
-  switch (prompt('Hi '+player+', who do you want to be?\n (P)acman, (G)host, (M)ario, or (D)onkey-kong?').toLowerCase() ) {
+  switch (prompt('Hi '+player+', who do you want to be?\n'+'(P)acman, (R)ed ghost, (Y)ellow ghost, or Pac(W)oman?').toLowerCase() ) {
     case 'p':
+      $()
       return 'img/avatars/pacman.png';
       break;
-    case 'g':
+    case 'r':
       return 'img/avatars/ghost_red.png';
       break;
-    case 'm':
-      return 'img/avatars/mario.png';
+    case 'y':
+      return 'img/avatars/ghost_yellow.png';
       break;
-    case 'd':
-      return 'img/avatars/dkkong.png';
+    case 'w':
+      return 'img/avatars/pacwoman.png';
       break;
     default:
       alert("Please enter a valid key. Let's try again");
       getPlayerAvatar(player);
   }
+}
+function updateRecapDivs(){
+  $('#p1 .icon_avatar').css("background-image", "url("+player1.avatar+")");
+  $('#p1 .wincount').text(player1.name+ ' \n'+'Wins: '+player1.winCount);
+  $('#p2 .icon_avatar').css("background-image", "url("+player2.avatar+")");
+  $('#p2 .wincount').text(player2.name+ ' \n'+'Wins: '+player2.winCount);
 }
 
 // Record moves and check if winner or tie
@@ -137,6 +145,7 @@ function isWinningDiagonal(player, x, y) {
     || (  JSON.stringify(battlefield['row1'][2]) === JSON.stringify(battlefield['row2'][1]) &&  JSON.stringify(battlefield['row2'][1]) === JSON.stringify(battlefield['row3'][0]) );
 }
 function resetBattlefield() {
+  debugger;
   battlefield = battlefieldInitialise();
   usedFields = [];
   whoseTurn = player1.name;

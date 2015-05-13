@@ -1,15 +1,18 @@
  /********* 
  All things header   ***************/
 .header {
-  text-align: center;
+  /*text-align: center;*/
   margin: 0 auto;
   padding: 0px;
   
 }
 
- /********* 
-PACMAN THEME  ***************/
+ /********* **** **** **** **** **** **** **** **** 
+PACMAN THEME 
+**** **** **** **** ****  ***************/
 
+/*********
+Header with logo and recap of Score  *********/
 .pacman.header {
   height: 100px;
   position: relative;
@@ -19,6 +22,46 @@ PACMAN THEME  ***************/
   background-repeat: no-repeat;
   background-color: rgba(0, 0, 0, 1);
 }
+
+.recap {
+  display: inline-block;
+  width: 23%;
+  height: 96%;
+  position: relative;
+  top: 39%;
+  border: 2px solid red;
+}
+#p1 {
+  position: relative;
+  left: 3%;
+}
+#p2 {
+  position: relative;
+  left: 50%;
+}
+.icon_avatar {
+  display: inline-block;
+  height: 99%;
+  width: 33%;
+  border: 1px solid red;
+  vertical-align: top;
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: center;
+}
+.wincount {
+  display: inline-block;
+  height: 99%;
+  width: 62%;
+  border: 1px solid red;
+  vertical-align: top;
+  color: white;
+}
+
+
+
+/***** **** 
+Body and BAttlefeield  **** **** */
 .pacman.body {
   background: url('../img/pacman_theme/pacman_bg.png') no-repeat center center; 
   background-size: 90% 90%;
@@ -38,6 +81,7 @@ PACMAN THEME  ***************/
   margin: 0 auto;
   position: relative;
   top: -1%;
+  left: 1%;
 }
 #row2.pacman {
   border-top: 4px dashed yellow;
@@ -74,17 +118,10 @@ background-position: right;
   position: relative;
   top: 30px;
 }
-/***********
-BODY  ******************/
-body {
 
-}
 
 /*******************
 Battlefield simple and borders  *********************/
-
-
-
 /*#row2 {
   border-top: 1px solid blue;
   border-bottom: 1px solid blue;
@@ -97,9 +134,10 @@ Battlefield simple and borders  *********************/
 
 /*******************
 FOOTER   *******************/
-.footer {
-/*  width: 100%;
+/*.footer {
+  width: 100%;
   height: 3em;
   position: relative;
-  top: 0px;*/
+  top: 0px;
 }
+*/

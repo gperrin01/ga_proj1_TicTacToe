@@ -2,40 +2,36 @@ $(document).ready(function(){
   setUpEventListeners();
 }) // END DOC READY
 
-// THE STEPS 
+/********************************
+ THE STEPS         ****************************/
 
-var battlefield = battlefieldInitialise();
+// var battlefield = battlefieldInitialise();
+// var usedFields = [];
+// var allPlayers = allPlayersInitialise() ;
+// var player1 = allPlayers.player1;
+// var player2 = allPlayers.player2;
+// // NEXT do I want var player1 = prompt('What is your name?') ?
+// var whoseTurn = allPlayers.whoseTurn;
+// whoseTurn = player1.name;
 
-var usedFields = [];
-var allPlayers = allPlayersInitialise() ;
-// ;{
-//   'player1': {'name': 'player1', 'avatar': 'img/ghost_red.png', 'winCount': 0},
-//   'player2': {'name': 'player2', 'avatar': 'img/mario.png', 'winCount': 0}, 
-//   'whoseTurn': ''
-//      };
-var player1 = allPlayers.player1;
-var player2 = allPlayers.player2;
-// NEXT var player1 = prompt('What is your name?'); 
-// NEXT choose your Avatar, NEXT: click on picture you want as avatar
-// getPlayer_1_Avatar();
-
-var whoseTurn = allPlayers.whoseTurn;
-whoseTurn = player1.name;
 // NEXT: randomize who starts: equal chances = pure random
 // whoseTurn = Math.floor(Math.random()*10) % 2 ) ===0 ? player1 : player2;
 // alert('Let us play! \n'+ whoseTurn+' will start! Click to choose your first move!');
 
-// END OF STEPS
+/******************************* end Steps
 
-// EVENT LISTERNERS
+THE EVENT LISTERNERS  ***********************/
+
 function setUpEventListeners() {
 
   // Upon click, store the move and check if winner
   $('.battlefield li').on('click', function(){
-  // get coord of where i clicked
+    // get coord of where i clicked
     var x = getXAxis($(this));
     var y = getYAxis($(this));
+
     // only perform action if this area hasn't been clicked on before
+    // Record(which player, which move, which area), then switch turn
     if ( usedFields.indexOf($(this).attr('id')) === -1 ) {
      if (whoseTurn === player1.name) {
         computeMoveAndCheck(player1, x, y, $(this) );
@@ -46,13 +42,15 @@ function setUpEventListeners() {
       }
     } else { alert('Click on an available zone')  }     
   })
-
   $('#reset').on('click', resetBattlefield)
+} 
+/*********** End Listerners
 
-} // End Listerners
+THE FUNCTIONS       *******************************/
 
-// THE FUNCTIONS
+// Initialise: create battlefield and get players' avatars
 function battlefieldInitialise (){
+  // NEXT: choose your theme pacman/mario, add appropriate class to the background header etc
   return {
       'row1': [1,2,3],
       'row2': [4,5,6],
@@ -67,7 +65,7 @@ function allPlayersInitialise() {
      };
  }
  function getPlayerAvatar(player) {
-  switch (prompt('Hi '+player+', who do you want to be?\n (p)acman, (g)host, (m)ario, or (d)onkey-kong?')) {
+  switch (prompt('Hi '+player+', who do you want to be?\n (P)acman, (G)host, (M)ario, or (D)onkey-kong?').toLowerCase() ) {
     case 'p':
       return 'img/avatars/pacman.png';
       break;
@@ -85,6 +83,9 @@ function allPlayersInitialise() {
       getPlayerAvatar(player);
   }
 }
+
+// Record moves and check if winner or tie
+
 function getXAxis ($item) {
   // X axis in battlefield oject = id of the parent <ul>
   return $item.parent().attr('id');
@@ -134,7 +135,7 @@ function resetBattlefield() {
   usedFields = [];
   whoseTurn = player1.name;
   // or random, or whoever started
-  $('.battlefield li').text('');
+  $('.battlefield li').css("background-image", 'none');
 }
 
 

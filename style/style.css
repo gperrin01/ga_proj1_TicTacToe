@@ -1,15 +1,32 @@
- /*All things header*/
+ /********* 
+ All things header   ***************/
 .header {
   height: 3em;
   position: relative;
   text-align: center;
   margin: 0 auto;
   padding: 0px;
+  
+}
+
+ /********* 
+PACMAN THEME  ***************/
+
+.pacman.header {
+  background: url('../img/pacman_theme/pacman_logo1.jpg');
+  background-position: center;
 }
 
 
+.pacman.footer {
+  background: url('../img/pacman_theme/pacman_logo1.jpg');
+  background-position: center;
+  background-size: contain;
+}
 
-/*Start with battlefield simple and borders*/
+
+/*******************
+Battlefield simple and borders  *********************/
 .battlefield {
   /*border: 2px solid black;*/
   width: 25em;
@@ -45,3 +62,12 @@
   border-right: 1px solid blue;
 }
 /*End battlefield*/
+
+/*******************
+FOOTER   *******************/
+.footer {
+  width: 100%;
+  height: 3em;
+  position: relative;
+  top: 40px;
+}

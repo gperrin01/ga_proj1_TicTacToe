@@ -1,16 +1,21 @@
 $(document).ready(function(){
-setUpEventListeners();
+  setUpEventListeners();
+}) // END DOC READY
 
 // THE STEPS 
-var battlefield = {
-  'row1': [1,2,3],
-  'row2': [4,5,6],
-  'row3': [7,8,9] 
-};
-// WHY: when I did var battlefieldInit, then var battle = battleInit, for the duration of the program, Init gets all values that I pass to battle only??
+
+function battlefieldInitialise (){
+  return {
+      'row1': [1,2,3],
+      'row2': [4,5,6],
+      'row3': [7,8,9] 
+  };
+}
+var battlefield = battlefieldInitialise();
+
 var usedFields = [];
 var allPlayers = {
-  'player1': {'name': 'player1', 'avatar': 'X', 'winCount': 0},
+  'player1': {'name': 'player1', 'avatar': 'img/pacman.png', 'winCount': 0},
   'player2': {'name': 'player2', 'avatar': 'O', 'winCount': 0}, 
   'whoseTurn': ''
      };
@@ -40,7 +45,6 @@ function setUpEventListeners() {
     if ( usedFields.indexOf($(this).attr('id')) === -1 ) {
      if (whoseTurn === player1.name) {
         computeMoveAndCheck(player1, x, y, $(this) );
-        // !!! PROBLEM this is pushing the whole <li> down !!!
         whoseTurn = player2.name;
         } else {
         computeMoveAndCheck(player2, x, y, $(this) );
@@ -66,13 +70,17 @@ function getYAxis ($item) {
 function computeMoveAndCheck(player, x, y, $item) {
   // update usedFields with my move, and battlefield array with player.name
   usedFields.push($item.attr('id'));
-  battlefield[x][y] = player.name; 
-  $item.append(player.avatar);
-  // PROBLEM this is pushing the whole <li> down !!!
+  battlefield[x][y] = player.name;
+
+  // test put background image in <li>
+  $item.css("background-image", "url("+player.avatar+")");
+
+  // $item.append(player.avatar);
+
   if (isWinning(player, x, y)  ) {
     player.winCount++;
     alert(player.name + ' wins!');
-    // PROBLEM: at this stage how can i FREEZE the board? ie no further clicks impact anything? can I mute the event listernes? don't wanna do a reset
+    // !!! WHY: at this stage how can i FREEZE the board? ie no further clicks impact anything? can I mute the event listernes? don't wanna do a reset
   } else if (usedFields.length === 9){
     return alert('Tie game!')
     }
@@ -83,7 +91,6 @@ function isWinning(player, x, y) {
 function isWinningRow(player, x, y) {
   // is current row all player.name?
   return JSON.stringify([player.name, player.name, player.name]) === JSON.stringify(battlefield[x]);
-  // PROBLEM: why does it not work without the JSON.string?? 2 bits are the same on the console but i get === false
 }
 function isWinningColumn(player, x, y) {
   // column is defined by y, pass the 3 other rows
@@ -95,11 +102,7 @@ function isWinningDiagonal(player, x, y) {
     || (  JSON.stringify(battlefield['row1'][2]) === JSON.stringify(battlefield['row2'][1]) &&  JSON.stringify(battlefield['row2'][1]) === JSON.stringify(battlefield['row3'][0]) );
 }
 function resetBattlefield() {
-  battlefield = {
-  'row1': [1,2,3],
-  'row2': [4,5,6],
-  'row3': [7,8,9] 
-};
+  battlefield = battlefieldInitialise();
   usedFields = [];
   whoseTurn = player1.name;
   // or random, or whoever started
@@ -107,4 +110,4 @@ function resetBattlefield() {
 }
 
 
-}) // END DOC READY
+

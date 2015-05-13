@@ -7,7 +7,7 @@
   padding: 0px;
 }
 
-/*end header */
+
 
 /*Start with battlefield simple and borders*/
 .battlefield {
@@ -32,6 +32,9 @@
   text-align: center;
   margin: 0 auto;
   padding: 0;
+  background-repeat: no-repeat;
+  background-size: 100px;
+  background-position: center;
 }
 #row2 {
   border-top: 1px solid blue;

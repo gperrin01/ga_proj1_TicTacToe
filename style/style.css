@@ -47,6 +47,24 @@ PACMAN THEME  ***************/
   border-left: 4px dashed yellow;
   border-right: 4px dashed yellow;
 }
+.pacman.row li {
+  width: 33%;
+  height: 100%;
+  display: inline-block;
+  font-size: 2em;
+  text-align: center;
+  margin: 0 -4px;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-size: 65px;
+  background-position: center;
+}
+.pacman.row.right_li {
+background-position: left;
+}
+.pacman.row.left_li {
+background-position: right;
+}
 .pacman.footer {
   background: url('../img/pacman_theme/pacman_logo1.jpg');
   background-position: center;
@@ -64,23 +82,9 @@ body {
 
 /*******************
 Battlefield simple and borders  *********************/
-.battlefield {
-  /*border: 2px solid black;*/
 
-}
 
-.row li {
-  width: 32.5%;
-  height: 100%;
-  display: inline-block;
-  font-size: 2em;
-  text-align: center;
-  margin: 0 auto;
-  padding: 0;
-  background-repeat: no-repeat;
-  background-size: 65px;
-  background-position: center;
-}
+
 /*#row2 {
   border-top: 1px solid blue;
   border-bottom: 1px solid blue;

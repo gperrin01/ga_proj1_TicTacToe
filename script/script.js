@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 /********************************
  THE STEPS         ****************************/
- 
+
 var battlefield = battlefieldInitialise();
 var usedFields = [];
 var allPlayers = allPlayersInitialise() ;
@@ -58,11 +58,17 @@ function battlefieldInitialise (){
   };
 }
 function allPlayersInitialise() {
+  var firstP = getPlayerName('First');
+  var secondP = getPlayerName('Second');
+
   return {
-    'player1': {'name': 'player1', 'avatar': getPlayerAvatar('Player1'), 'winCount': 0},
-    'player2': {'name': 'player2', 'avatar': getPlayerAvatar('Player2'), 'winCount': 0}, 
+    'player1': {'name': firstP, 'avatar': getPlayerAvatar('Player1'), 'winCount': 0},
+    'player2': {'name': secondP, 'avatar': getPlayerAvatar('Player2'), 'winCount': 0}, 
     'whoseTurn': ''
      };
+ }
+function getPlayerName(player) {
+  return prompt('Who is the '+player+ ' Player?');
  }
  function getPlayerAvatar(player) {
   switch (prompt('Hi '+player+', who do you want to be?\n (P)acman, (G)host, (M)ario, or (D)onkey-kong?').toLowerCase() ) {

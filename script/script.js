@@ -6,12 +6,13 @@ var battlefield = {
   'row1': [1,2,3],
   'row2': [4,5,6],
   'row3': [7,8,9] 
-}
+};
+// WHY: when I did var battlefieldInit, then var battle = battleInit, for the duration of the program, Init gets all values that I pass to battle only??
 var usedFields = [];
 var allPlayers = {
-  'player1': {'name': 'player1', 'avatar': 'X'},
-  'player2': {'name': 'player2', 'avatar': 'O'},
-  'whoseTurn': 'player1'
+  'player1': {'name': 'player1', 'avatar': 'X', 'winCount': 0},
+  'player2': {'name': 'player2', 'avatar': 'O', 'winCount': 0}, 
+  'whoseTurn': ''
      };
 var player1 = allPlayers.player1;
 var player2 = allPlayers.player2;
@@ -20,6 +21,7 @@ var player2 = allPlayers.player2;
 // getPlayer_1_Avatar();
 
 var whoseTurn = allPlayers.whoseTurn;
+whoseTurn = player1.name;
 // NEXT: randomize who starts: equal chances = pure random
 // whoseTurn = Math.floor(Math.random()*10) % 2 ) ===0 ? player1 : player2;
 // alert('Let us play! \n'+ whoseTurn+' will start! Click to choose your first move!');
@@ -29,7 +31,7 @@ var whoseTurn = allPlayers.whoseTurn;
 // EVENT LISTERNERS
 function setUpEventListeners() {
 
-  // UPDATES ARRAY WHEN WE CLICK
+  // Upon click, store the move and check if winner
   $('.battlefield li').on('click', function(){
   // get coord of where i clicked
     var x = getXAxis($(this));
@@ -47,6 +49,8 @@ function setUpEventListeners() {
     } else { alert('Click on an available zone')  }     
   })
 
+  $('#reset').on('click', resetBattlefield)
+
 } // End Listerners
 
 // THE FUNCTIONS
@@ -60,15 +64,18 @@ function getYAxis ($item) {
 }
 
 function computeMoveAndCheck(player, x, y, $item) {
-  // update usedFields with my move, and battlefield with player
+  // update usedFields with my move, and battlefield array with player.name
   usedFields.push($item.attr('id'));
   battlefield[x][y] = player.name; 
   $item.append(player.avatar);
   // PROBLEM this is pushing the whole <li> down !!!
   if (isWinning(player, x, y)  ) {
+    player.winCount++;
     alert(player.name + ' wins!');
-  }
-  // PROBLEM: at this stage how can i FREEZE the board? ie no further clicks impact anything? can I mute the event listernes?
+    // PROBLEM: at this stage how can i FREEZE the board? ie no further clicks impact anything? can I mute the event listernes? don't wanna do a reset
+  } else if (usedFields.length === 9){
+    return alert('Tie game!')
+    }
 }
 function isWinning(player, x, y) {
   return isWinningRow(player, x, y) || isWinningColumn(player, x, y) || isWinningDiagonal(player, x, y);
@@ -87,14 +94,17 @@ function isWinningDiagonal(player, x, y) {
   return ( JSON.stringify(battlefield['row1'][0]) === JSON.stringify(battlefield['row2'][1]) &&  JSON.stringify(battlefield['row2'][1]) === JSON.stringify(battlefield['row3'][2]) )
     || (  JSON.stringify(battlefield['row1'][2]) === JSON.stringify(battlefield['row2'][1]) &&  JSON.stringify(battlefield['row2'][1]) === JSON.stringify(battlefield['row3'][0]) );
 }
-
-// function getPlayer_1_Avatar() {
-//   avatar1 = prompt('Hey '+player1+ ', are you the X or the O type?');
-// }
-// function getPlayer_2_Avatar() {
-//   avatar2 = prompt('Hey '+player2+ ', are you the X or the O type?');
-// }
-
+function resetBattlefield() {
+  battlefield = {
+  'row1': [1,2,3],
+  'row2': [4,5,6],
+  'row3': [7,8,9] 
+};
+  usedFields = [];
+  whoseTurn = player1.name;
+  // or random, or whoever started
+  $('.battlefield li').text('');
+}
 
 
 }) // END DOC READY

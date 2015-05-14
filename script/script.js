@@ -81,7 +81,7 @@ function allPlayersInitialise() {
 function getPlayerName(player) {
   return prompt('Who is the '+player+ ' Player?');
 }
- function getPlayerExtras(player) {
+function getPlayerExtras(player) {
   switch (prompt('Hi '+player+', who do you want to be?\n'+'(P)acman, (R)ed ghost, (Y)ellow ghost, or Pac(W)oman?').toLowerCase() ) {
     case 'p':
       return [allAvatars.pacman.img, allAvatars.pacman.sound];
@@ -217,13 +217,37 @@ function resetBattlefield() {;
 
 
 function displayRankings () {
-  var objInStorage = {};
+  // build array of all names, avatars & wincounts - hoping if element has no wincount it will return null or undefined and the count will contnue as normal
+  // index of the top 3 elements in winCounts -> if (1,2,3) I will get the (1,2,3)th objects in all keys of localStorage !
+  var winCountsInOrder = [];
+  var namesInOrder = [];
+  var avatarsInOrder = [];
   for (var prop in localStorage) {
-    // build the object { 'Gui': {name, avatar, sound}  }
-    objInStorage[prop] = localStorage[prop];
+    winCountsInOrder.push( JSON.parse(localStorage[prop]).winCount );
+    namesInOrder.push( JSON.parse(localStorage[prop]).name );
+    avatarsInOrder.push( JSON.parse(localStorage[prop]).avatar );
   }
-  console.log(objInStorage);
+
+  var topThreeIndex = getTopIndex_N(winCountsInOrder, 3);
+  // -> 1st ranking is topThreeIndex[0] !!
 }
+
+function getTopIndex_N(array, n) {
+  // obviously cant do it more often than the length of the array
+  var shadowArray = array.map(function(x) {return x } )
+  var topIndex = [];
+  for (var i=1; i <= Math.min(n, array.length) ; i++) {
+    // get the position of the max element in the array, then store the position and remove the element
+    // use index in shadowArray because this one is static while array is always reduced by the largest number
+    var x = shadowArray.indexOf(Math.max.apply(null, array));
+    topIndex.push(x);
+    array.splice(x, 1);
+  }
+  return topIndex;
+
+}
+
+
 
 
 

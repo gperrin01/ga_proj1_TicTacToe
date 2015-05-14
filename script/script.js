@@ -93,9 +93,12 @@ function getPlayerName(player) {
 }
 function updateRecapDivs(){
   $('#p1 .icon_avatar').css("background-image", "url("+player1.avatar+")");
-  $('#p1 .wincount').text(player1.name+ ' \n'+'Wins: '+player1.winCount);
+  $('#p1 .wincount p:first-child').text(player1.name);
+  $('#p1 .wincount p:last-child').text('Wins: '+player1.winCount);
+  // now update player2
   $('#p2 .icon_avatar').css("background-image", "url("+player2.avatar+")");
-  $('#p2 .wincount').text(player2.name+ ' \n'+'Wins: '+player2.winCount);
+  $('#p2 .wincount p:first-child').text(player2.name);
+  $('#p2 .wincount p:last-child').text('Wins: '+player2.winCount);
 }
 
 // Record moves and check if winner or tie
@@ -144,14 +147,16 @@ function isWinningDiagonal(player, x, y) {
   return ( JSON.stringify(battlefield['row1'][0]) === JSON.stringify(battlefield['row2'][1]) &&  JSON.stringify(battlefield['row2'][1]) === JSON.stringify(battlefield['row3'][2]) )
     || (  JSON.stringify(battlefield['row1'][2]) === JSON.stringify(battlefield['row2'][1]) &&  JSON.stringify(battlefield['row2'][1]) === JSON.stringify(battlefield['row3'][0]) );
 }
-function resetBattlefield() {
-  debugger;
+function resetBattlefield() {;
   battlefield = battlefieldInitialise();
   usedFields = [];
   whoseTurn = player1.name;
   // or random, or whoever started
   $('.battlefield li').css("background-image", 'none');
 }
+
+// Reset players
+  // $('#p1 .icon_avatar, #p2 .icon_avatar').css("background-image", 'none');
 
 
 

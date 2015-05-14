@@ -1,5 +1,8 @@
+// LOTS OF BUGS ON ROUD 3 !!!
+
 $(document).ready(function(){
   eventListenersInitGame();
+  displayRankings();
 }) // END DOC READY
 
 /********************************
@@ -227,9 +230,16 @@ function displayRankings () {
     namesInOrder.push( JSON.parse(localStorage[prop]).name );
     avatarsInOrder.push( JSON.parse(localStorage[prop]).avatar );
   }
-
-  var topThreeIndex = getTopIndex_N(winCountsInOrder, 3);
+  // copy winCounts as it will be lost during the slice of the following function
+  var topThreeIndex = winCountsInOrder.map(function(x) {return x } )
+  getTopIndex_N(topThreeIndex, 3);
   // -> 1st ranking is topThreeIndex[0] !!
+
+  for (var i=1; i<=3; i++) {
+    $('#rank'+i+' :nth-child(2)').text(winCountsInOrder[i-1]);
+    $('#rank'+i+' :nth-child(3)').text(namesInOrder[i-1]);
+    $('#rank'+i+' :nth-child(4)').css('background-image', "url("+avatarsInOrder[i-1]+")");
+  }
 }
 
 function getTopIndex_N(array, n) {
@@ -244,7 +254,6 @@ function getTopIndex_N(array, n) {
     array.splice(x, 1);
   }
   return topIndex;
-
 }
 
 

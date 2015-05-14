@@ -32,17 +32,17 @@ Header with logo and recap of Score  *********/
   height: 55%;
   position: relative;
   top: 27%;
-  font-family: Bubblegum;
-  font-size: 19px;
+  font-family: Arcade Interlaced;
+  font-size: 14px;
   /*border: 2px solid red;*/
 }
 #p1 {
   position: relative;
-  left: 4%;
+  left: 1%;
 }
 #p2 {
   position: relative;
-  left: 33%;
+  left: 35%;
 }
 .icon_avatar {
   display: inline-block;
@@ -105,8 +105,8 @@ Body and BAttlefeield  **** **** */
   vertical-align: middle;
   text-align: center;
   color: white;
-  font-family: BubbleGum;
-  font-size: 17px;
+  font-family: Arcade Interlaced;
+  font-size: 11px;
   padding-top: 20px;
 }
 #retrieve {
@@ -131,7 +131,7 @@ Body and BAttlefeield  **** **** */
   background-position-y: 134px;
 }
 
-/*** Only when refreshing page, welcome plus rankings 
+/*** Welcome plus rankings, only when refreshing page, 
 **********/
 .container {
     height: 360px;
@@ -141,13 +141,13 @@ Body and BAttlefeield  **** **** */
 }
 .welcome {
   border: 4px dotted rgb(61, 61, 216);
-  height: 300px;
+  height: 348px;
   width: 434px;
   position: relative;
   top: -411px;
   left: 409px;
   color: rgba(223, 223, 64, 0.95);
-  font-family: BubbleGum;
+  font-family: Arcade Interlaced;
   font-size: 18px;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.87);
@@ -170,9 +170,19 @@ Body and BAttlefeield  **** **** */
   height: 72%;
   width: 100%;
   color: rgba(223, 223, 64, 0.95);;
-  font-family: BubbleGum;
+  font-family: Arcade Interlaced;
   text-align: center;
+  position: relative;
+  top: 12px;
 }
+.rankings :nth-child(4) {
+  background-size: 35%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/**********    BATTLEFIELD ****************************/
+
 .pacman.battlefield {
   width: 100%;
   height: 25em;

@@ -32,8 +32,8 @@ Header with logo and recap of Score  *********/
   height: 55%;
   position: relative;
   top: 27%;
-  font-family: PacFont;
-  font-size: 13px;
+  font-family: Bubblegum;
+  font-size: 19px;
   /*border: 2px solid red;*/
 }
 #p1 {
@@ -80,7 +80,7 @@ Body and BAttlefeield  **** **** */
 
 .pacman.UX_row {
   display: inline-block;
-  margin-bottom: 54px;
+  margin-bottom: 15px;
   position: relative;
   top: -48px;
 }
@@ -92,24 +92,36 @@ Body and BAttlefeield  **** **** */
   height: 90px;
   width: 90px;
   position: relative;
-  left: 168%;
+  left: 187%;
   vertical-align: middle;
 }
-#clearit {
-/*  background: url('../img/pacman_theme/clearit.png') no-repeat center center;
-  background-size: 79%;*/
+#clear {
+  border-radius: 87px;
+  border: 4px dotted rgb(61, 61, 216);
+  height: 35px;
+  width: 71px;
+  position: relative;
+  left: 392%;
+  vertical-align: middle;
+  text-align: center;
+  color: white;
+  font-family: BubbleGum;
+  font-size: 17px;
+  padding-top: 20px;
+}
+#retrieve {
   border-radius: 87px;
   border: 3px dashed rgb(61, 61, 216);
   height: 24px;
-  width: 90px;
+  width: 71px;
   position: relative;
-  left: 356%;
+  left: 398%;
   vertical-align: bottom;
   text-align: center;
   color: white;
   font-family: BubbleGum;
   font-size: 15px;
-  padding-top: 11px;
+  padding-top: 8px;
 }
 
 .pacman.body {

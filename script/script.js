@@ -5,6 +5,12 @@ $(document).ready(function(){
 /********************************
  THE VARIABLES        ****************************/
 
+var allAvatars = {
+      'pacman': {'img': 'img/avatars/pacman.png', 'sound': '#'},
+      'pacwoman': {'img': 'img/avatars/pacwoanman.png', 'sound': '#'},
+      'ghost_red': {'img': 'img/avatars/ghost_red.png', 'sound': '#'},
+      'ghost_yellow': {'img': 'img/avatars/ghost_yellow.png', 'sound': '#'},
+}
 var battlefield = battlefieldInitialise();
 var usedFields = [];
 var allPlayers; 
@@ -58,37 +64,81 @@ function battlefieldInitialise (){
       'row3': [7,8,9] 
   };
 }
+
 function allPlayersInitialise() {
   var firstP = getPlayerName('First');
+  var firstExtras = getPlayerExtras(firstP);
   var secondP = getPlayerName('Second');
+  var secondExtras = getPlayerExtras(secondP);
   return {
-    'player1': {'name': firstP, 'avatar': getPlayerAvatar(firstP), 'winCount': 0},
-    'player2': {'name': secondP, 'avatar': getPlayerAvatar(secondP), 'winCount': 0}, 
+    'player1': {'name': firstP, 'avatar': firstExtras[0], 'sound': firstExtras[2], 'winCount': 0},
+    'player2': {'name': secondP, 'avatar': secondExtras[0], 'sound': secondExtras[1], 'winCount': 0}, 
     'whoseTurn': ''
      };
 }
 function getPlayerName(player) {
   return prompt('Who is the '+player+ ' Player?');
 }
- function getPlayerAvatar(player) {
+ function getPlayerExtras(player) {
   switch (prompt('Hi '+player+', who do you want to be?\n'+'(P)acman, (R)ed ghost, (Y)ellow ghost, or Pac(W)oman?').toLowerCase() ) {
     case 'p':
-      $()
-      return 'img/avatars/pacman.png';
+      return [allAvatars.pacman.img, allAvatars.pacman.sound];
       break;
     case 'r':
-      return 'img/avatars/ghost_red.png';
+      return [allAvatars.ghost_red.img, allAvatars.ghost_red.sound];
       break;
     case 'y':
-      return 'img/avatars/ghost_yellow.png';
+      return [allAvatars.ghost_yellow.img, allAvatars.ghost_yellow.sound];
       break;
     case 'w':
-      return 'img/avatars/pacwoman.png';
+      return [allAvatars.pacwoman.img, allAvatars.pacwoman.sound];
       break;
     default:
       alert("Please enter a valid key. Let's try again");
       getPlayerAvatar(player);
   }
+}
+
+
+
+
+
+// function allPlayersInitialise() {
+//   var firstP = getPlayerName('First');
+//   var secondP = getPlayerName('Second');
+//   return {
+//     'player1': {'name': firstP, 'avatar': getPlayerAvatar(firstP), 'sound': getPlayerSound('player1'), 'winCount': 0},
+//     'player2': {'name': secondP, 'avatar': getPlayerAvatar(secondP), 'sound': getPlayerSound('player2'), 'winCount': 0}, 
+//     'whoseTurn': ''
+//      };
+// }
+// function getPlayerName(player) {
+//   return prompt('Who is the '+player+ ' Player?');
+// }
+//  function getPlayerAvatar(player) {
+//   switch (prompt('Hi '+player+', who do you want to be?\n'+'(P)acman, (R)ed ghost, (Y)ellow ghost, or Pac(W)oman?').toLowerCase() ) {
+//     case 'p':
+//       $()
+//       return 'img/avatars/pacman.png';
+//       break;
+//     case 'r':
+//       return 'img/avatars/ghost_red.png';
+//       break;
+//     case 'y':
+//       return 'img/avatars/ghost_yellow.png';
+//       break;
+//     case 'w':
+//       return 'img/avatars/pacwoman.png';
+//       break;
+//     default:
+//       alert("Please enter a valid key. Let's try again");
+//       getPlayerAvatar(player);
+//   }
+// }
+
+
+function getPlayerSound(player) {
+
 }
 function updateAvatars(){
   $('#p1 .icon_avatar').css("background-image", "url("+player1.avatar+")");
@@ -117,6 +167,7 @@ function computeAndCheckWinner() {
   var y = getYAxis($(this));
   // only perform action if this area hasn't been clicked on before
   // Record(which player, which move, which area), then switch turn
+  console.log(usedFields.indexOf($(this).attr('id')) === -1)
   if ( usedFields.indexOf($(this).attr('id')) === -1 ) {
     if (whoseTurn === player1.name) {
       computeMove(player1, x, y, $(this) );

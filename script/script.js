@@ -17,6 +17,7 @@ var allPlayers;
 var player1; 
 var player2; 
 var whoseTurn;
+displayRankings();
 // animation on Play button to make it stand out, disappears on click
 
 /*end Steps
@@ -27,6 +28,7 @@ function eventListenersInitGame() {
   // Click play to start the game, only after that the other buttons can respond
   $('#ready').on('click', function() {
     // remove animation on click and prevent re-clickng
+    $('.welcome').css('display', 'none')
     $('#ready').off('click');
     allPlayers = allPlayersInitialise() ;
     player1 = allPlayers.player1;
@@ -212,6 +214,24 @@ function resetBattlefield() {;
   // BUG BUG when playing mulitple times
   eventListenersPlayGame();
 }
+
+
+function displayRankings () {
+  var objInStorage = {};
+  for (var prop in localStorage) {
+    // build the object { 'Gui': {name, avatar, sound}  }
+    objInStorage[prop] = localStorage[prop];
+  }
+  console.log(objInStorage);
+}
+
+
+
+
+
+
+
+
 
 
 

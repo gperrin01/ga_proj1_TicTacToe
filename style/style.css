@@ -86,7 +86,7 @@ Body and BAttlefeield  **** **** */
 }
 #ready {
   background: url('../img/pacman_theme/ready.jpg') no-repeat center center;
-  background-size: 100%;
+  background-size: contain;
   border-radius: 87px;
   border: 4px solid rgb(61, 61, 216);
   height: 90px;
@@ -129,6 +129,49 @@ Body and BAttlefeield  **** **** */
   background-size: 90% 90%;
   background-color: black;
   background-position-y: 134px;
+}
+
+/*** Only when refreshing page, welcome plus rankings 
+**********/
+.container {
+    height: 360px;
+  /*border: 1px solid red;*/
+  position: relative;
+  top: -22px;
+}
+.welcome {
+  border: 4px dotted rgb(61, 61, 216);
+  height: 300px;
+  width: 434px;
+  position: relative;
+  top: -411px;
+  left: 409px;
+  color: rgba(223, 223, 64, 0.95);
+  font-family: BubbleGum;
+  font-size: 18px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.87);
+}
+.welcome p:first-child{
+  margin-top: 11px;
+  margin-bottom: 8px;
+}
+.welcome p:nth-child(2) {
+  margin-top: 8px;
+  margin-bottom: 7px;
+}
+
+.dash {
+  border: 4px dotted rgb(61, 61, 216);
+}
+
+.rankings {
+  border-top: 4px dotted rgb(61, 61, 216);
+  height: 72%;
+  width: 100%;
+  color: rgba(223, 223, 64, 0.95);;
+  font-family: BubbleGum;
+  text-align: center;
 }
 .pacman.battlefield {
   width: 100%;
@@ -178,7 +221,7 @@ background-position: right;
   width: 100%;
   height: 3em;
   position: relative;
-  top: 30px;
+  top: 48px;
 }
 
 

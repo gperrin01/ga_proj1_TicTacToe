@@ -3,6 +3,12 @@
 $(document).ready(function(){
   eventListenersInitGame();
   displayRankings();
+  soundManager.setup( {
+    url: './audio/SM2/swf/',
+    flashVersion:9,
+    preferFlash: false,
+  })
+playSound('pacman_beginning.wav');
 }) // END DOC READY
 
 /********************************
@@ -68,6 +74,12 @@ function battlefieldInitialise (){
       'row2': [4,5,6],
       'row3': [7,8,9] 
   };
+}
+function playSound(file) {
+  var file = soundManager.createSound({
+    id: file,
+    url: 'audio/' +file});
+  file.play();
 }
 
 function allPlayersInitialise() {
@@ -164,7 +176,8 @@ function checkWinner(player, x, y) {
     updateScoreboard();
     updateLocalStorage(player);
     $('.battlefield li').off('click', computeAndCheckWinner);
-    alert(player.name + ' wins!');
+      playSound('pacman_intermission.wav');
+      alert(player.name + ' wins!');
     // animation on Clear button to make it stand out, disappears on click
   } else if (usedFields.length === 9){
     return alert('Tie game!');

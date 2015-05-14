@@ -38,11 +38,11 @@ Header with logo and recap of Score  *********/
 }
 #p1 {
   position: relative;
-  left: 1%;
+  left: 5%;
 }
 #p2 {
   position: relative;
-  left: 35%;
+  left: 31%;
 }
 .icon_avatar {
   display: inline-block;

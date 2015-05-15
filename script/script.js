@@ -33,20 +33,34 @@ THE EVENT LISTERNERS
 
 function eventListenersInitGame() {
 
-  // Click play to start the game, only after that the other buttons can respond
+  //click play to show screen to enter player names
   $('#ready').on('click', function() {
-    // See Anims page - remove animation on click and prevent re-clickng + sound
-    animInitGame();
+    // make it a function
+    $('.welcome>p:first-child').text("Player 1!");
+    $('.welcome>p:nth-child(2)').text('Enter name & choose avatar!');
+    $('.welcome p').css('font-size', '16px');
+    $('td:first-of-type').text('Name?');
+    $('td:nth-of-type(2)').text('|');
+    $('#rank1 :nth-child(1)').css('background-image', 'img/avatars/pacman.png');
+    $('#rank1 :nth-child(2)').css('background-image', 'img/avatars/pacwoman.png');
+    $('#rank1 :nth-child(3)').css('background-image', 'img/avatars/ghost_red.png');
+    $('#rank1 :nth-child(4)').css('background-image', 'img/avatars/ghost_yellow.png');
+    $('#rank2 *').text('');
+    $('#rank3 *').text('');
+
+
+   // next, click on the avatar!
+
+
     allPlayers = allPlayersInitialise() ;
     player1 = allPlayers.player1;
     player2 = allPlayers.player2;
+    whoseTurn = player1.name;
+    /* NEXT RANDOM whoseTurn = Math.floor(Math.random()*10) % 2 ) ===0 ? player1 : player2; */
     animUpdateAvatars();
     animUpdateScoreboard();
-    // whoseTurn = allPlayers.whoseTurn;
-    whoseTurn = player1.name;
-    /* NEXT RANDOM whoseTurn = Math.floor(Math.random()*10) % 2 ) ===0 ? player1 : player2;
-// alert('Let us play! \n'+ whoseTurn+' will start! Click to choose your first move!'); */
-    
+    // See Anims page - remove ready_animation on click and prevent re-clickng + sound
+    animInitGame();
     // now enable the clicks on the field
     eventListenersPlayGame();
   })
@@ -103,6 +117,7 @@ function getPlayerExtras(player) {
       alert("Please enter a valid key. Let's try again");
       getPlayerExtras(player);
   }
+     // still BUG when typing wrong key on getExtras - > cannot read propoerty of undefined
 }
 
 /***** Functions to Compute Moves **********/
@@ -153,7 +168,7 @@ function checkWinner(player, x, y) {
   if (isWinning(player, x, y)  ) {
     playSound('pacman_intermission.wav');
     player.winCount++;
-    updateScoreboard();
+    animUpdateScoreboard();
     updateLocalStorage(player);
     $('.battlefield li').off('click', computeAndCheckWinner);
     alert(player.name + ' wins!');
@@ -201,7 +216,7 @@ function updateLocalStorage(player) {
 
 /************ Reset Functions  *******/
 
-function resetBattlefield() {;
+function resetBattlefield() {
   battlefield = battlefieldInitialise();
   usedFields = [];
   whoseTurn = player1.name;
@@ -212,39 +227,3 @@ function resetBattlefield() {;
   eventListenersPlayGame();
 }
 
-
-
-
-
-// function allPlayersInitialise() {
-//   var firstP = getPlayerName('First');
-//   var secondP = getPlayerName('Second');
-//   return {
-//     'player1': {'name': firstP, 'avatar': getPlayerAvatar(firstP), 'sound': getPlayerSound('player1'), 'winCount': 0},
-//     'player2': {'name': secondP, 'avatar': getPlayerAvatar(secondP), 'sound': getPlayerSound('player2'), 'winCount': 0}, 
-//     'whoseTurn': ''
-//      };
-// }
-// function getPlayerName(player) {
-//   return prompt('Who is the '+player+ ' Player?');
-// }
-//  function getPlayerAvatar(player) {
-//   switch (prompt('Hi '+player+', who do you want to be?\n'+'(P)acman, (R)ed ghost, (Y)ellow ghost, or Pac(W)oman?').toLowerCase() ) {
-//     case 'p':
-//       $()
-//       return 'img/avatars/pacman.png';
-//       break;
-//     case 'r':
-//       return 'img/avatars/ghost_red.png';
-//       break;
-//     case 'y':
-//       return 'img/avatars/ghost_yellow.png';
-//       break;
-//     case 'w':
-//       return 'img/avatars/pacwoman.png';
-//       break;
-//     default:
-//       alert("Please enter a valid key. Let's try again");
-//       getPlayerAvatar(player);
-//   }
-// }

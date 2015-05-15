@@ -2,7 +2,7 @@
 
 $(document).ready(function(){
   eventListenersInitGame();
-  displayRankings();
+  animWelcomeScreen();
   soundManager.setup( {
     url: './audio/SM2/swf/',
     flashVersion:9,
@@ -11,7 +11,8 @@ $(document).ready(function(){
 }) // END DOC READY
 
 /********************************
- THE VARIABLES        ****************************/
+ THE VARIABLES       
+****************************/
 
 var allAvatars = {
       'pacman': {'img': 'img/avatars/pacman.png', 'sound': 'pacman_eatfruit.wav'},
@@ -25,25 +26,22 @@ var allPlayers;
 var player1; 
 var player2; 
 var whoseTurn;
-displayRankings();
-// animation on Play button to make it stand out, disappears on click
 
-/*end Steps
-
-THE EVENT LISTERNERS  ***********************/
+/*******************
+THE EVENT LISTERNERS  
+***********************/
 
 function eventListenersInitGame() {
+
   // Click play to start the game, only after that the other buttons can respond
   $('#ready').on('click', function() {
-    // remove animation on click and prevent re-clickng
-    $('.welcome').css('display', 'none')
-    $('#ready').off('click');
-    playSound('pacman_beginning.wav');
+    // See Anims page - remove animation on click and prevent re-clickng + sound
+    animInitGame();
     allPlayers = allPlayersInitialise() ;
     player1 = allPlayers.player1;
     player2 = allPlayers.player2;
-    updateAvatars();
-    updateScoreboard();
+    animUpdateAvatars();
+    animUpdateScoreboard();
     // whoseTurn = allPlayers.whoseTurn;
     whoseTurn = player1.name;
     /* NEXT RANDOM whoseTurn = Math.floor(Math.random()*10) % 2 ) ===0 ? player1 : player2;
@@ -59,29 +57,20 @@ function eventListenersPlayGame() {
   // clear the field but keep the players and the count
   $('#clear').on('click', resetBattlefield)
 } 
-/*********** End Listerners
 
-**********************************
+/**********************
 THE FUNCTIONS       
 ******************************/
 
 /***** Functions to Initialise: create battlefield and get players' avatars *********/
 
 function battlefieldInitialise (){
-  // NEXT: choose your theme pacman/mario, add appropriate class to the background header etc
   return {
       'row1': [1,2,3],
       'row2': [4,5,6],
       'row3': [7,8,9] 
   };
 }
-function playSound(file) {
-  var file = soundManager.createSound({
-    id: file,
-    url: 'audio/' +file});
-  file.play();
-}
-
 function allPlayersInitialise() {
   var firstP = getPlayerName('First');
   var firstExtras = getPlayerExtras(firstP);
@@ -115,16 +104,6 @@ function getPlayerExtras(player) {
       getPlayerExtras(player);
   }
 }
-function updateAvatars(){
-  $('#p1 .icon_avatar').css("background-image", "url("+player1.avatar+")");
-  $('#p1 .wincount p:first-child').text(player1.name);
-  $('#p2 .icon_avatar').css("background-image", "url("+player2.avatar+")");
-  $('#p2 .wincount p:first-child').text(player2.name);
-}
-function updateScoreboard() {
-  $('#p1 .wincount p:last-child').text('Wins: '+player1.winCount);
-  $('#p2 .wincount p:last-child').text('Wins: '+player2.winCount);
-}
 
 /***** Functions to Compute Moves **********/
 
@@ -137,6 +116,7 @@ function getYAxis ($item) {
   return $item.index();
 }
 function computeAndCheckWinner() {
+
   // play relevant sound:
   whoseTurn === player1.name ? playSound(player1.sound) : playSound(player2.sound);
   //ensure zone won't respond any more
@@ -157,10 +137,7 @@ function computeAndCheckWinner() {
       checkWinner(player2,x,y);
       whoseTurn = player1.name;       
       }
-}
-  // else { 
-  //   // alert('Click on an available zone')
-  // }     
+}  
 
 function computeMove(player, x, y, $item) {
   // update usedFields with my move, and battlefield array with player.name
@@ -181,6 +158,7 @@ function checkWinner(player, x, y) {
     $('.battlefield li').off('click', computeAndCheckWinner);
     alert(player.name + ' wins!');
     // animation on Clear button to make it stand out, disappears on click
+
   } else if (usedFields.length === 9){
     playSound('pacman_death.wav');
     return alert('Tie game!');
@@ -233,52 +211,6 @@ function resetBattlefield() {;
   // BUG BUG when playing mulitple times
   eventListenersPlayGame();
 }
-
-
-function displayRankings () {
-  // build array of all names, avatars & wincounts - hoping if element has no wincount it will return null or undefined and the count will contnue as normal
-  // index of the top 3 elements in winCounts -> if (1,2,3) I will get the (1,2,3)th objects in all keys of localStorage !
-  var winCountsInOrder = [];
-  var namesInOrder = [];
-  var avatarsInOrder = [];
-  for (var prop in localStorage) {
-    winCountsInOrder.push( JSON.parse(localStorage[prop]).winCount );
-    namesInOrder.push( JSON.parse(localStorage[prop]).name );
-    avatarsInOrder.push( JSON.parse(localStorage[prop]).avatar );
-  }
-  // copy winCounts as it will be lost during the slice of the following function
-  var topThreeIndex = winCountsInOrder.map(function(x) {return x } )
-  getTopIndex_N(topThreeIndex, 3);
-  // -> 1st ranking is topThreeIndex[0] !!
-
-  for (var i=1; i<=3; i++) {
-    $('#rank'+i+' :nth-child(2)').text(winCountsInOrder[i-1]);
-    $('#rank'+i+' :nth-child(3)').text(namesInOrder[i-1]);
-    $('#rank'+i+' :nth-child(4)').css('background-image', "url("+avatarsInOrder[i-1]+")");
-  }
-}
-
-function getTopIndex_N(array, n) {
-  // obviously cant do it more often than the length of the array
-  var shadowArray = array.map(function(x) {return x } )
-  var topIndex = [];
-  for (var i=1; i <= Math.min(n, array.length) ; i++) {
-    // get the position of the max element in the array, then store the position and remove the element
-    // use index in shadowArray because this one is static while array is always reduced by the largest number
-    var x = shadowArray.indexOf(Math.max.apply(null, array));
-    topIndex.push(x);
-    array.splice(x, 1);
-  }
-  return topIndex;
-}
-
-
-
-
-
-
-
-
 
 
 

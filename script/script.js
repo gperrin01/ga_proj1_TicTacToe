@@ -44,7 +44,7 @@ function eventListenersInitGame() {
     player2 = allPlayers.player2;
     updateAvatars();
     updateScoreboard();
-    whoseTurn = allPlayers.whoseTurn;
+    // whoseTurn = allPlayers.whoseTurn;
     whoseTurn = player1.name;
     /* NEXT RANDOM whoseTurn = Math.floor(Math.random()*10) % 2 ) ===0 ? player1 : player2;
 // alert('Let us play! \n'+ whoseTurn+' will start! Click to choose your first move!'); */
@@ -89,8 +89,8 @@ function allPlayersInitialise() {
   var secondExtras = getPlayerExtras(secondP);
   return {
     'player1': {'name': firstP, 'avatar': firstExtras[0], 'sound': firstExtras[1], 'winCount': 0},
-    'player2': {'name': secondP, 'avatar': secondExtras[0], 'sound': secondExtras[1], 'winCount': 0}, 
-    'whoseTurn': ''
+    'player2': {'name': secondP, 'avatar': secondExtras[0], 'sound': secondExtras[1], 'winCount': 0}
+    // ,    'whoseTurn': ''
      };
 }
 function getPlayerName(player) {
@@ -137,6 +137,8 @@ function getYAxis ($item) {
   return $item.index();
 }
 function computeAndCheckWinner() {
+  // play relevant sound:
+  whoseTurn === player1.name ? playSound(player1.sound) : playSound(player2.sound);
   //ensure zone won't respond any more
   $(this).off('click', computeAndCheckWinner);
   // get coordinates of where i clicked

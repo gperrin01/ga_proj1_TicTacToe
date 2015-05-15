@@ -8,17 +8,16 @@ $(document).ready(function(){
     flashVersion:9,
     preferFlash: false,
   })
-playSound('pacman_beginning.wav');
 }) // END DOC READY
 
 /********************************
  THE VARIABLES        ****************************/
 
 var allAvatars = {
-      'pacman': {'img': 'img/avatars/pacman.png', 'sound': '#'},
-      'pacwoman': {'img': 'img/avatars/pacwoman.png', 'sound': '#'},
-      'ghost_red': {'img': 'img/avatars/ghost_red.png', 'sound': '#'},
-      'ghost_yellow': {'img': 'img/avatars/ghost_yellow.png', 'sound': '#'},
+      'pacman': {'img': 'img/avatars/pacman.png', 'sound': 'pacman_eatfruit.wav'},
+      'pacwoman': {'img': 'img/avatars/pacwoman.png', 'sound': 'pacman_chomp.wav'},
+      'ghost_red': {'img': 'img/avatars/ghost_red.png', 'sound': 'pacman_eatghost.wav'},
+      'ghost_yellow': {'img': 'img/avatars/ghost_yellow.png', 'sound': 'pacman_eatghost.wav'},
 }
 var battlefield = battlefieldInitialise();
 var usedFields = [];
@@ -39,6 +38,7 @@ function eventListenersInitGame() {
     // remove animation on click and prevent re-clickng
     $('.welcome').css('display', 'none')
     $('#ready').off('click');
+    playSound('pacman_beginning.wav');
     allPlayers = allPlayersInitialise() ;
     player1 = allPlayers.player1;
     player2 = allPlayers.player2;
@@ -172,14 +172,15 @@ function computeMove(player, x, y, $item) {
 
 function checkWinner(player, x, y) {
   if (isWinning(player, x, y)  ) {
+    playSound('pacman_intermission.wav');
     player.winCount++;
     updateScoreboard();
     updateLocalStorage(player);
     $('.battlefield li').off('click', computeAndCheckWinner);
-      playSound('pacman_intermission.wav');
-      alert(player.name + ' wins!');
+    alert(player.name + ' wins!');
     // animation on Clear button to make it stand out, disappears on click
   } else if (usedFields.length === 9){
+    playSound('pacman_death.wav');
     return alert('Tie game!');
     $('.battlefield li').off('click', computeAndCheckWinner);
     // animation on Clear button to make it stand out

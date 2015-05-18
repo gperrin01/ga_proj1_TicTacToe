@@ -39,14 +39,15 @@ function eventListenersInitGame() {
     $('.welcome>p:first-child').text("Player 1!");
     $('.welcome>p:nth-child(2)').text('Enter name & choose avatar!');
     $('.welcome p').css('font-size', '16px');
-    $('td:first-of-type').text('Name?');
-    $('td:nth-of-type(2)').text('|');
-    $('#rank1 :nth-child(1)').css('background-image', 'img/avatars/pacman.png');
-    $('#rank1 :nth-child(2)').css('background-image', 'img/avatars/pacwoman.png');
-    $('#rank1 :nth-child(3)').css('background-image', 'img/avatars/ghost_red.png');
-    $('#rank1 :nth-child(4)').css('background-image', 'img/avatars/ghost_yellow.png');
-    $('#rank2 *').text('');
-    $('#rank3 *').text('');
+
+    // $('td:first-of-type').text('Name?');
+    // $('td:nth-of-type(2)').text('|');
+    // $('#rank1 :nth-child(1)').css('background-image', 'img/avatars/pacman.png');
+    // $('#rank1 :nth-child(2)').css('background-image', 'img/avatars/pacwoman.png');
+    // $('#rank1 :nth-child(3)').css('background-image', 'img/avatars/ghost_red.png');
+    // $('#rank1 :nth-child(4)').css('background-image', 'img/avatars/ghost_yellow.png');
+    // $('#rank2 *').text('');
+    // $('#rank3 *').text('');
 
 
    // next, click on the avatar!

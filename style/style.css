@@ -144,8 +144,8 @@ Body and BAttlefeield  **** **** */
   height: 348px;
   width: 434px;
   position: relative;
-  top: -411px;
-  left: 409px;
+  top: -498px;
+  left: 388px;
   color: rgba(223, 223, 64, 0.95);
   font-family: Arcade Interlaced;
   font-size: 18px;
@@ -181,6 +181,42 @@ Body and BAttlefeield  **** **** */
   background-position: center;
 }
 
+/*pop-up box to enter info*/
+.enter_info {
+  /*border: 4px dotted red;*/
+   border-top: 4px dotted rgb(61, 61, 216); 
+  color: rgba(223, 223, 64, 0.95);
+  font-family: Arcade Interlaced;
+  text-align: center;
+  height: 262px;
+  width: 434px;
+  position: relative;
+  top: -327px;
+  left: -58px;
+}
+.enter_info input {
+  position: relative;
+  top: 50px;
+  height: 57px;
+  width: 254px;
+  cursor: default;
+  background-color: black;
+  bborder-top: 4px dotted yellow;
+}
+.enter_info p {
+  position: relative;
+  top: 80px;
+}
+.enter_info img {
+  height: 15%;
+  width: 15%;
+  display: inline-block;
+  margin: auto;
+}
+
+.hidden {
+  display: none;
+}
 /**********    BATTLEFIELD ****************************/
 
 .pacman.battlefield {
